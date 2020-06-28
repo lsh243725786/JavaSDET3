@@ -93,10 +93,17 @@ public class BasePage {
 
     }
 
+    /**
+     * 加载文件的方法
+     * @param path 文件路径
+     * @return
+     */
     public UIAuto load(String path) {
+        //先初始化出来一个基本的map对象
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
         UIAuto uiauto = null;
         try {
+            //读取获取到的资源路径，再转换成UIAuto这个模型
             uiauto = mapper.readValue(
                     BasePage.class.getResourceAsStream(path),
                     UIAuto.class
@@ -104,6 +111,7 @@ public class BasePage {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        //转换完成后返回，默认是个null,如果文件不存在，则返回null
         return uiauto;
 
     }
