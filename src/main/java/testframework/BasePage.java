@@ -11,7 +11,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Stream;
 
-//自动化领域建模
+/**
+ * 自动化领域建模
+ */
 public class BasePage {
     List<PageObjectModel> pages = new ArrayList<>();
 
@@ -66,14 +68,17 @@ public class BasePage {
 
     }
 
-    public void run(@org.jetbrains.annotations.NotNull UIAuto uiAuto) {
+    public void run(@org.jetbrains.annotations.NotNull UiAuto uiAuto) {
+        //读取yaml文件里的steps步骤，完成流式操作
         uiAuto.steps.stream().forEach(m -> {
 //            if (m.keySet().contains("click")) {
 //                click((HashMap<String, Object>) m.get("click"));
 //            }
-
+            //如果存在click的key
             if (m.containsKey("click")) {
+                //取出click的内容，以HashMap的形式传给by
                 HashMap<String, Object> by = (HashMap<String, Object>) m.get("click");
+                //对click完成调用
                 click(by);
             }
 
@@ -98,15 +103,15 @@ public class BasePage {
      * @param path 文件路径
      * @return
      */
-    public UIAuto load(String path) {
+    public UiAuto load(String path) {
         //先初始化出来一个基本的map对象
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
-        UIAuto uiauto = null;
+        UiAuto uiauto = null;
         try {
             //读取获取到的资源路径，再转换成UIAuto这个模型
             uiauto = mapper.readValue(
                     BasePage.class.getResourceAsStream(path),
-                    UIAuto.class
+                    UiAuto.class
             );
         } catch (IOException e) {
             e.printStackTrace();

@@ -12,7 +12,7 @@ steps:
 #      by: id
 #      value: search
 #  #简化格式
-#  - by: uai expr
+#  - by: id
 #    value: search
 #    action: click
 #    #进一步简化，如果by只是单个简单的字符串，可以进一步简化

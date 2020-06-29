@@ -28,19 +28,19 @@ public class DDTest {
 
     @ParameterizedTest(name = "{index} {1}")
     @MethodSource
-    void classic(UIAuto uiAuto, String path){
+    void classic(UiAuto uiAuto, String path){
         basePage.run(uiAuto);
     }
 
     static List<Arguments> classic(){
-        basePage = UIAutoFactory.create("web");
+        basePage = UiAutoFactory.create("web");
         List<Arguments> all= new ArrayList<Arguments>();
 
         Arrays.asList(
                 "/testframework/webauto_1.yaml",
                 "/testframework/webauto_2.yaml"
         ).stream().forEach(path->{
-            UIAuto uiAuto= basePage.load(path);
+            UiAuto uiAuto= basePage.load(path);
             uiAuto.description=path;
             all.add(arguments(uiAuto, path));
         });

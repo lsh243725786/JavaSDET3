@@ -26,21 +26,21 @@ class BasePageTest {
 
     @Test
     void run() {
-        UIAuto uiauto=basePage.load("/testframework/uiauto.yaml");
+        UiAuto uiauto=basePage.load("/testframework/uiauto.yaml");
         basePage.run(uiauto);
     }
 
     @Test
     void runPOM(){
         basePage.loadPages("src/main/resources/testframework");
-        UIAuto uiauto=basePage.load("/testframework/webauto_3.yaml");
+        UiAuto uiauto=basePage.load("/testframework/webauto_3.yaml");
         basePage.run(uiauto);
 
     }
 
     @Test
     void load() throws JsonProcessingException {
-        UIAuto uiauto=basePage.load("/testframework/uiauto.yaml");
+        UiAuto uiauto=basePage.load("/testframework/uiauto.yaml");
         ObjectMapper mapper=new ObjectMapper();
         System.out.println(mapper.writeValueAsString(uiauto));
     }

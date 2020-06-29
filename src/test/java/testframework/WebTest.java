@@ -28,12 +28,12 @@ public class WebTest {
 
     @ParameterizedTest(name = "{index} {1}")
     @MethodSource
-    void classic(UIAuto uiAuto, String path){
+    void classic(UiAuto uiAuto, String path){
         basePage.run(uiAuto);
     }
 
     static List<Arguments> classic(){
-        basePage = UIAutoFactory.create("web");
+        basePage = UiAutoFactory.create("web");
         basePage.loadPages("src/main/resources/testframework");
         List<Arguments> all= new ArrayList<Arguments>();
 
@@ -42,7 +42,7 @@ public class WebTest {
 //                "/testframework/webauto_2.yaml",
                 "/testframework/webauto_3.yaml"
         ).stream().forEach(path->{
-            UIAuto uiAuto= basePage.load(path);
+            UiAuto uiAuto= basePage.load(path);
             uiAuto.description=path;
             all.add(arguments(uiAuto, path));
         });
