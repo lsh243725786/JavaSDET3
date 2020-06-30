@@ -68,13 +68,19 @@ public class BasePage {
 
     }
 
+
+    /**
+     * 读取的测试用例yaml配置文件字段进行点击，元素识别等操作解析
+     * 
+     * @param uiAuto
+     */
     public void run(@org.jetbrains.annotations.NotNull UiAuto uiAuto) {
         //读取yaml文件里的steps步骤，完成流式操作
         uiAuto.steps.stream().forEach(m -> {
 //            if (m.keySet().contains("click")) {
 //                click((HashMap<String, Object>) m.get("click"));
 //            }
-            //如果存在click的key
+            //如果map存在click的key
             if (m.containsKey("click")) {
                 //取出click的内容，以HashMap的形式传给by
                 HashMap<String, Object> by = (HashMap<String, Object>) m.get("click");
@@ -99,7 +105,8 @@ public class BasePage {
     }
 
     /**
-     * 加载文件的方法
+     * 读取测试用例yaml配置文件
+     *
      * @param path 文件路径
      * @return
      */
@@ -121,6 +128,13 @@ public class BasePage {
 
     }
 
+
+    /**
+     * 读取单个po页面yaml配置文件
+     *
+     * @param path
+     * @return
+     */
     public PageObjectModel loadPage(String path) {
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
         PageObjectModel pom = null;
@@ -135,6 +149,11 @@ public class BasePage {
         return pom;
     }
 
+    /**
+     *读取加载所有page页面yaml文件
+     *
+     * @param dir
+     */
     public void loadPages(String dir) {
         Stream.of(new File(dir).list(new FilenameFilter() {
             @Override
